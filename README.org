@@ -1,0 +1,22 @@
+* Propósito
+No final de um encontro, um dos participantes do grupo fica
+responsável por escolher o tema do próximo encontro. Todos os
+participantes devem escolher algum assunto ou tópico relacionado ao
+tema escolhido e apresentar no próximo encontro. Cada participante
+deve escrever um texto sobre seu tópico escolhido.
+
+Esse repositório é o local onde os participantes vão colocar os textos
+escritos.
+
+
+* Funcionamento
+Para cada encontro uma pasta no padrão
+/Numero_Tema_Dia-Mes-Ano/. Sendo 'Numero' o numero do encontro.
+
+Cada participante deve criar um arquivo com o padrão
+/Participante_Tópico.Extensão/. Sendo extensão markdown(.md) ou
+org(.org).
+
+
+* Padrão de escrita
+Ainda não há.
