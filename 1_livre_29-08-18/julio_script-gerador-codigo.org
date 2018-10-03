@@ -1,0 +1,77 @@
+
+* Problema
+Precisei fazer um aplicação usando NodeJS, express e sequelize para o
+teste de uma empresa. O teste consistia em criar uma api e alguns
+end-points.
+
+Segui o padrão MVC(mas sem a View), onde:
+
+models é onde os as regras do banco ficava. Cada arquivo representava
+uma tabela do banco.
+
+routes é onde ficava as configurações de quais metódos e funções cada
+end-point tinha.
+
+controller era onde ficava as funções que recebiam as requisições e
+acessavam o banco.
+
+As pastas tinham os arquivos com os mesmos nomes. Por exemplo, se eu
+quero um end-point client, eu vou criar um arquivo client.js nas três.
+Exemplo:
+- models/client.js ficava a tabela do client(client tem um nome, uma
+  uuid e etc).
+- routes/client.js ficava os metódos e funções(importadas do
+  controllers) do end-point(GET, GET :id, POST e etc).
+- controllers/client.js ficava as funções que recebiam uma requisição,
+  faziam a validação, acessavam o banco, lidavam com os erros e
+  retornavam a resposta.
+
+
+* Análise
+Para os models o sequelize tem gerador via cli.
+
+Todos os arquivos em routes e controller tinham a mesma estrutura.  A
+ideia mais prática e rápida que pensei foi em criar um snippet para
+agilizar a escrita do código. Depois de criar o snippet, eu teria que
+criar vários arquivos(um para cada end-point/model/controller).
+
+Resolvi esse problema dos vários arquivos criando um script shell para
+fazer isso de forma automática.
+
+
+
+* Solução
+O script recebe um caminho(project) e para cada elemento de files ele
+cria um arquivo em routes e controllers com a extensão .js
+
+Dentro dos arquivos de routes ele coloca o texto "route" e em
+controllers "controller". Esse é o texto para ativar o snippet.
+#+begin_src shell :tangle yes
+
+project=$1
+
+directory=$(pwd)
+
+mkdir -p $directory/$project/{controllers,routes}/
+
+files=("client" "seller" "sale" "item" "product")
+
+for file in ${files[@]}
+do
+    touch $directory/$project/controllers/$file.js
+    echo "controller" >> $directory/$project/controllers/$file.js
+
+    touch $directory/$project/routes/$file.js
+    echo "route" >> $directory/$project/routes/$file.js
+done
+
+#+end_src
+
+
+* Considerações
+No momento que eu criei o script estava atrás de reduzir o tempo. Como
+algumas rotas e controllers tinham certas diferenças preferi colocar
+nos arquivos apenas o texto para chamar o snippet.
+
+Uma ideia seria fazer o script já colocar o código, no lugar de apenas o
+texto.
